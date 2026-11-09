@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <!-- Configuracao da pagina: acentos, titulo da aba e arquivo de estilo -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha de RPG</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Coluna esquerda: o Personagem -->
+    <h1>Ficha do Personagem</h1>
+    <main class="layout">
+
+        <aside class="coluna-personagem">
+
+            <section id="status" class="card">
+
+                <!-- Colocar a foto do personagem, wrapper recebe os efeitos de dano e cura -->
+                <div class="foto-wrapper" id="foto-wrapper">
+                    <img id="foto" alt="Foto do personagem">
+                    <div id="efeitos"></div>
+                </div>
+
+                <label class="botao-foto">
+                    Escolher foto:
+                    <input type="file" id="input-foto" accept="image/*" hidden>
+                </label>
+
+                <div id="area-nome"></div>
+
+                <!-- Seção de vida e mana -->
+                <div class="barra-bloco">
+                    ❤️ Vida:
+                    <input type="number" id="Vida-atual"> /
+                    <input type="number" id="Vida-max">
+                    <div class="barra">
+                        <div class="barra-preench vida" id="barra-vida"></div>
+                    </div>
+                </div>
+
+                <div class="barra-bloco">
+                    🔷 Mana:
+                    <input type="number" id="Mana-atual"> /
+                    <input type="number" id="Mana-max">
+                    <div class="barra">
+                        <div class="barra-preench mana" id="barra-mana"></div>
+                    </div>
+                </div>
+
+                <!-- Dano e cura -->
+                <div id="dano-cura">
+                    <h3>Dano e Cura</h3>
+
+                    <div class="linha-acao">
+                        <select id="alvo">
+                            <option value="vida">Vida</option>
+                            <option value="mana">Mana</option>
+                        </select>
+                        <input type="number" id="quantidade" placeholder="Quantidade">
+                    </div>
+
+                    <div class="linha-acao">
+                        <button id="btn-dano">Perder</button>
+                        <button id="btn-cura">Recuperar</button>
+                    </div>
+                </div>
+
+            </section>
+            <!-- Música de fundo: escolha, tocar/pausar e volume -->
+            <section id="audio" class="card">
+                <h2>Música e Sons</h2>
+
+                <label> Música:
+                    <select id="musica">
+                        <option value="">Nenhuma</option>
+                        <option value="groovy">Groovy</option>
+                        <option value="ambience">Ambience</option>
+                    </select>
+                </label>
+
+                <button id="btn-musica">Tocar</button>
+
+                <label>🔊
+                    <input type="range" id="volume" min="0" max="100" value="50">
+                </label>
+
+                <label>
+                    <input type="checkbox" id="mutar-efeitos"> Mutar efeitos
+                </label>
+            </section>
+
+            <!-- Exportar e importar a ficha como arquivo -->
+
+            <section id="arquivos" class="card">
+                <h2>Ficha</h2>
+
+                <div id="arquivo">
+                    <button id="btn-exportar"> Exportar</button>
+                    <label class="botao-foto">
+                        Importar
+                        <input type="file" id="input-importar" accept=".json,application/json" hidden>
+                    </label>
+                </div>
+
+                <button id="btn-limpar"> Limpar ficha</button> <!-- Apaga a ficha salva e volta ao estado inicial -->
+            </section>
+        </aside>
+
+        <!-- Coluna direita: jogadas e características -->
+        <div class="coluna-principal">
+
+            <!-- Rolagens de dado -->
+            <section id="dados" class="card">
+                <h2>Rolar Dados</h2>
+
+                <!-- Liga o modo que combina dados diferentes na mesma jogada -->
+                <label class="modo">
+                    <input type="checkbox" id="modo-combinado"> Modo Combinado
+                </label>
+
+                <!-- Quantidade e bônus: a quantidade só vale no modo rápido -->
+                <div id="opcoes-dado">
+                    <label class="so-rapido">Qtd.
+                        <input type="number" id="qtd-dados" value="1" min="1" max="100">
+                    </label>
+                    <label>Bônus
+                        <input type="number" id="bonus-dado" value="0">
+                    </label>
+                </div>
+
+                <!-- Modo rápido: clicar no dado rola na hora -->
+                <div class="linha-dados so-rapido">
+                    <button data-faces="4">D4</button>
+                    <button data-faces="6">D6</button>
+                    <button data-faces="8">D8</button>
+                    <button data-faces="10">D10</button>
+                    <button data-faces="12">D12</button>
+                    <button data-faces="20">D20</button>
+                    <button data-faces="100">D100</button>
+
+                    <!-- Dado personalizado -->
+                    <div id="dado-custom">
+                        <input type="number" id="faces-custom" min="2" placeholder="Lados">
+                        <button id="btn-custom">Rolar</button>
+                    </div>
+                </div>
+
+                <!-- Modo combinado; clicar adiciona o dado à jogada -->
+                <div id="bandeja" class="so-combinado"></div>
+                <div id="acoes-dados" class="so-combinado">
+                    <button id="btn-rolar-bandeja">Rolar Dados</button>
+                    <button id="btn-limpar-bandeja">Limpar</button>
+                </div>
+
+                <div id="resultado">-</div>
+                <div id="detalhe"></div>
+                <ul id="historico"></ul>
+            </section>
+
+            <!-- Secao de atributos: os cards sao criados pelo JavaScript -->
+            <section id="atributos" class="card">
+                <h2>Atributos</h2>
+
+                <div id="lista-atributos"></div>
+            </section>
+
+            <!-- Seção de perícias: A lista é criada pelo JavaScript -->
+            <section id="pericias" class="card">
+                <h2>Perícias</h2>
+
+                <div id="nova-pericia">
+                    <input type="text" id="pericia-nome" placeholder="Nome (ex: Furtividade)">
+                    <input type="number" id="pericia-bonus" placeholder="Bônus" value="0">
+                    <button id="btn-add-pericia">Adicionar</button>
+                </div>
+
+                <ul id="lista-pericias"></ul>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- JavaScript no final, para o HTML ja existir quando o script rodar -->
+    <script src="script.js"></script>
+</body>
+</html>

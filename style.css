@@ -1,0 +1,850 @@
+/* Aparencia da pagina: cores, fonte e alinhamento */
+body {
+    background: #1b1b2f;
+    color: #eeeeee;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Botoes dos dados */
+#dados button {
+    padding: 10px 16px;
+    margin: 4px;
+    font-size: 1rem;
+    background: #4a4a8a;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    height: 38px;
+}
+
+/* Numero grande do resultado */
+#resultado {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #f1c40f;
+    margin-top: 16px;
+}
+
+/* Texto pequeno com o detalhe da rolagem */
+#detalhe {
+    color: #aaaaaa;
+    min-height: 24px;
+}
+
+/* Cards dos atributos lado a lado */
+#lista-atributos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+
+.atributo {
+    background: #25254a;
+    padding: 12px;
+    border-radius: 8px;
+    width: 140px;
+}
+
+.atributo input {
+    width: 60px;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+/* Valor do atributo: texto clicável, vira campo ao dar dois cliques */
+.atributo span.a-valor {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 34px;
+    margin: 6px auto;
+    font-size: 1.4rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Campo do modificador: menor, com cor padrão */
+.atributo input.a-valor {
+    width: 60px;
+    height: 34px;
+    margin: 6px auto;
+    font-size: 1.2rem;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+/* Modificador */
+.atributo .a-mod {
+    margin: 8px 0;
+    font-size: 0.9rem;
+    color: #f1c40f;
+}
+
+.atributo span.a-mod-valor {
+    display: inline-block;
+    min-width: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+}
+
+.atributo input.a-mod-valor {
+    width: 50px;
+    height: 26px;
+    font-size: 0.9rem;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+/* Campos de escrita ficam escuros */
+input {
+    background: #2a2a45;
+    color: #eeeeee;
+    border: 1px solid #55558a;
+    border-radius: 4px;
+}
+
+/* Remove as setinhas no Chrome, Edge, Safari */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Remove as setinhas no firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+/* Cada bloco de barra (vida ou mana) */
+.barra-bloco {
+    max-width: 400px;
+    margin: 12px auto;
+}
+
+.barra-bloco input {
+    width: 60px;
+    text-align: center;
+}
+
+/* Fundo da barra e preenchimento colorido */
+.barra {
+    height: 16px;
+    background: #111111;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 6px;
+}
+
+.barra-preench {
+    height: 100%;
+    transition: width 0.4s;
+}
+
+.barra-preench.vida {
+    background: #e74c3c;
+}
+
+.barra-preench.mana {
+    background: #3498db;
+}
+
+/* Controle de dano e cura */
+#dano-cura {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid #3a3a6a;
+}
+
+#dano-cura select {
+    padding: 8px;
+    background: #2a2a45;
+    color: #eeeeee;
+    border: 1px solid #55558a;
+    border-radius: 4px;
+}
+
+#dano-cura button {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+}
+
+#btn-dano {
+    background: #a93226;
+}
+
+#btn-cura {
+    background: #1e8449;
+}
+
+/* Mesmo estilo nos botões de rolar dos atributos */
+.atributo button {
+    padding: 6px 10px;
+    background: #4a4a8a;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* Foto redonda do personagem */
+.foto-wrapper {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 16px auto;
+}
+
+.foto-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid #6c6cc4;
+    box-sizing: border-box;
+}
+
+/* Camada colorida por cima da imagem, invisível até o efeito */
+.foto-wrapper::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Dano: foto vermelha e tremendo */
+.foto-wrapper.dano {
+    animation: tremer 0.5s;
+}
+
+.foto-wrapper.dano::after {
+    background: rgba(255, 0, 0, 0.55);
+    animation: piscar 0.8s;
+}
+
+/* Cura: Foto verde */
+.foto-wrapper.cura::after {
+    background: rgba(0, 255, 100, 0.45);
+    animation: piscar 1.2s;
+}
+
+/* Animações: Tremor e piscada de cor */
+@keyframes tremer {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    20% {
+        transform: translateX(-10px) rotate(-3deg);
+    }
+
+    40% {
+        transform: translateX(10px) rotate(3deg);
+    }
+
+    60% {
+        transform: translateX(-8px);
+    }
+
+    80% {
+        transform: translateX(8px);
+    }
+}
+
+@keyframes piscar {
+    0% {
+        opacity: 0;
+    }
+
+    20%,
+    70% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+/* Símbolos de saúde que aparecem na foto */
+#efeitos {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.simbolo {
+    position: absolute;
+    bottom: 20%;
+    font-size: 1.8rem;
+    animation: subir 1.6s ease-out both;
+}
+
+@keyframes subir {
+    from {
+        transform: translateY(0) scale(0.6);
+        opacity: 0.8;
+    }
+
+    to {
+        transform: translateY(-140px) scale(1.3);
+        opacity: 0;
+    }
+}
+
+/* Botão de escolher a foto */
+.botao-foto {
+    display: inline-block;
+    padding: 6px 12px;
+    background: #4a4a8a;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+/* Linha com todos os dados centralizados */
+.linha-dados {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+/* Dado personalizado: campo e botão lado a lado */
+#dado-custom {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#dado-custom input {
+    width: 80px;
+    height: 38px;
+    margin: 4px;
+    padding: 0 8px;
+    font-size: 1rem;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+/* Linha para adicionar uma perícia */
+#nova-pericia {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+#nova-pericia input {
+    height: 38px;
+    padding: 0 8px;
+    box-sizing: border-box;
+}
+
+#pericia-nome {
+    width: 220px;
+}
+
+#pericia-bonus {
+    width: 80px;
+    text-align: center;
+}
+
+/* Botões das perícias */
+#btn-add-pericia,
+.pericia button {
+    height: 34px;
+    padding: 0 12px;
+    background: #4a4a8a;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* Lista de perícias */
+#lista-pericias {
+    list-style: none;
+    padding: 0;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.pericia {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #25254a;
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin-top: 8px;
+}
+
+.pericia span.p-nome,
+.pericia span.p-bonus {
+    display: flex;
+    align-items: center;
+    height: 34px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.pericia span.p-nome {
+    flex: 1;
+    min-width: 0;
+    padding: 0 8px;
+    justify-content: center;
+}
+
+.pericia span.p-bonus {
+    width: 60px;
+    justify-content: center;
+    font-weight: bold;
+    color: #f1c40f;
+}
+
+/* Campo que aparece durante a edição */
+.pericia input.p-nome {
+    flex: 1;
+    min-width: 0;
+    height: 34px;
+    padding: 0 8px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.pericia input.p-bonus {
+    width: 60px;
+    height: 34px;
+    padding: 0 4px;
+    box-sizing: border-box;
+    text-align: center;
+    color: #f1c40f;
+}
+
+.pericia .remover {
+    background: #a93226;
+}
+
+/* Botão de limpar: discreto, para ninguém clicar por acidente */
+#btn-limpar {
+    display: block;
+    margin: 24px auto 0;
+    padding: 8px 14px;
+    background: transparent;
+    color: #e57373;
+    border: 1px solid #a93226;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#btn-limpar:hover {
+    background: #a93226;
+    color: white;
+}
+
+/* Nome do personagem: Texto clicavel, vira campo ao dar dois cliques */
+#area-nome {
+    margin: 12px 0;
+}
+
+#area-nome span.nome-personagem {
+    display: inline-block;
+    min-width: 260px;
+    padding: 8px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+}
+
+#area-nome input.nome-personagem {
+    width: 260px;
+    padding: 8px;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+/* Botões de exportar e importar */
+#arquivo {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+#btn-exportar {
+    padding: 6px 12px;
+    background: #4a4a8a;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9;
+}
+
+#audio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin: 12px 0;
+}
+
+#audio select {
+    padding: 8px;
+    background: #2a2a45;
+    color: #eeeeee;
+    border: 1px solid #55558a;
+    border-radius: 4px;
+}
+
+#btn-musica {
+    padding: 8px 14px;
+    background: #4a4a8a;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* Deslizante de volume: sem a caixa escira dos outros inputs */
+#audio input[type="range"] {
+    width: 140px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    vertical-align: middle;
+}
+
+/* Caixinha de mutar: tamanho normal, sem o estilo dos campos de texto */
+#audio input[type="checkbox"] {
+    width: auto;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+/* Campos de quantidade e bônus */
+#opcoes-dado {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 10px;
+}
+
+#opcoes-dado label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+#opcoes-dado input {
+    width: 70px;
+    height: 34px;
+    padding: 0 8px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+/* Histórico das últimas rolagens */
+#historico {
+    list-style: none;
+    padding: 0;
+    margin: 12px auto 0;
+    max-width: 420px;
+    font-size: 0.85rem;
+    color: #aaaaaa;
+}
+
+#historico li {
+    padding: 4px 0;
+    border-top: 1px solid #333355;
+}
+
+/* A rolagem mais recente fica em destaque */
+#historico li:first child {
+    color: #eeeeee;
+}
+
+/* Caixa que liga o modo combinado */
+.modo {
+    display: block;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.modo input {
+    width: auto;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+/* Cada modo mostra só os seus elementos */
+#dados.combinado .so-rapido {
+    display: none;
+}
+
+#dados:not(.combinado) .so-combinado {
+    display: none;
+}
+
+/* Bandeja: dados lado a lado, quebrando de linha se faltar espaço */
+#bandeja {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin: 16px 0;
+}
+
+/* Caixa de cada dado: referência para posicionar o contador */
+.dado-wrap {
+    position: relative;
+    width: 54px;
+    height: 54px;
+}
+
+/* Dado: o formato vem do clip-path */
+#bandeja .dado {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+#bandeja .dado:hover {
+    transform: scale(1.1);
+}
+
+#bandeja .dado:active {
+    transform: scale(0.95);
+}
+
+/* Cor e formato de cada dado */
+#bandeja .d4 {
+    background: #1e9a4a;
+    clip-path: polygon(50% 5%, 100% 95%, 0 95%);
+    padding-top: 14px;
+}
+
+#bandeja .d6 {
+    background: #2fa8b8;
+    border-radius: 6px;
+}
+
+#bandeja .d8 {
+    background: #6c35c9;
+    clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+}
+
+#bandeja .d10 {
+    background: #c0359a;
+    clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+}
+
+#bandeja .d12 {
+    background: #d93f33;
+    clip-path: polygon(50% 0, 100% 38%, 82% 100%, 18% 100%, 0 38%);
+}
+
+#bandeja .d20 {
+    background: #dc7f0a;
+    clip-path: polygon(50% 0, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
+}
+
+#bandeja .d100 {
+    background: #7a7a7a;
+    clip-path: polygon(50% 0, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0 60%, 10% 20%);
+}
+
+#bandeja .dcustom {
+    background: #3d8f9f;
+    clip-path: polygon(30% 0, 70% 0, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0 70%, 0 30%);
+}
+
+/* Contador no canto do dado */
+.badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 5px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f1e8ff;
+    color: #1b1b2f;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Botão "+" para um dado com outro número de lados */
+#bandeja .dado-mais {
+    width: 54px;
+    height: 54px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: #b36bff;
+    color: white;
+    font-size: 1.8rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Botões de rolar e limpar */
+#acoes-dados {
+    display: flex;
+    gap: 8px;
+    max-width: 420px;
+    margin: 0 auto;
+}
+
+#btn-rolar-bandeja {
+    flex: 1;
+}
+
+#dados #btn-limpar-bandeja {
+    background: #a93226;
+}
+
+h1 {
+    margin: 0 0 24px;
+}
+
+/* Duas colunas: personagem à esquerda, o resto à esquerda */
+.layout {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+    align-items: start;
+}
+
+/* Cada coluna empilha os seus cards */
+.coluna-personagem,
+.coluna-principal {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 0;
+}
+
+/* Card: caixa com fundo, borda, cantos arredondados e sombra */
+.card {
+    background: #20203f;
+    border: 1px solid #2f2f5a;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Título de cada card */
+.card h2 {
+    margin: 0 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #3a3a6a;
+    font-size: 1.2rem;
+    text-align: left;
+}
+
+/* Telas estreitas (celular): uma coluna só */
+@media (max-width: 800px) {
+    .layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+#dano-cura h3 {
+    margin: 0 0 10px;
+    text-align: left;
+}
+
+.linha-acao {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.linha-acao select,
+.linha-acao input,
+.linha-acao button {
+    height: 38px;
+    box-sizing: border-box;
+}
+
+.linha-acao input,
+.linha-acao button {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Card de música: controles um embaixo do outro */
+#audio {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    margin: 0;
+}
+
+#audio label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#audio select {
+    flex: 1;
+}
+
+#audio input[type="range"] {
+    flex: 1;
+    width: auto;
+}
+
+#btn-musica {
+    height: 38px;
+}
+
+/* Detalhes de acabamento: botões reagem ao mouse e ao teclado */
+button:hover {
+    filter: brightness(1.15);
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+    outline: 2px solid #b36bff;
+    outline-offset: 2px;
+}
